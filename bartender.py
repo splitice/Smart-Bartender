@@ -8,6 +8,12 @@ import json
 import threading
 import traceback
 
+from lib_oled96 import ssd1306
+from smbus import SMBus
+from PIL import ImageFont, ImageDraw, Image
+FONT = ImageFont.load_default()
+I2CBUS = SMBus(1)
+
 from dotstar import Adafruit_DotStar
 from menu import MenuItem, Menu, Back, MenuContext, MenuDelegate
 from drinks import drink_list, drink_options
@@ -21,10 +27,12 @@ LEFT_BTN_PIN = 12
 LEFT_PIN_BOUNCE = 1000
 
 RIGHT_BTN_PIN = 16
+RIGHT_BTN_PIN = 5
 RIGHT_PIN_BOUNCE = 2000
 
 OLED_RESET_PIN = 20
 OLED_DC_PIN = 21
+OLED_RESET_PIN = 15
 
 NUMBER_NEOPIXELS = 45
 NEOPIXEL_DATA_PIN = 26
@@ -55,14 +63,10 @@ class Bartender(MenuDelegate):
 		spi = gaugette.spi.SPI(spi_bus, spi_device)
 
 		# Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
-		self.led = gaugette.ssd1306.SSD1306(gpio, spi, reset_pin=OLED_RESET_PIN, dc_pin=OLED_DC_PIN, rows=self.screen_height, cols=self.screen_width) # Change rows & cols values depending on your display dimensions.
-		self.led.begin()
-		self.led.clear_display()
+		self.led = ssd1306(I2CBUS) # Change rows & cols values depending on your display dimensions.
+		logo = Image.open('pi_logo.png')
+		self.led.canvas.bitmap((32, 0), logo, fill=0)
 		self.led.display()
-		self.led.invert_display()
-		time.sleep(0.5)
-		self.led.normal_display()
-		time.sleep(0.5)
 
 		# load the pump configuration from file
 		self.pump_configuration = Bartender.readPumpConfiguration()
@@ -226,8 +230,8 @@ class Bartender(MenuDelegate):
 
 	def displayMenuItem(self, menuItem):
 		print menuItem.name
-		self.led.clear_display()
-		self.led.draw_text2(0,20,menuItem.name,2)
+		self.led.cls()
+		self.led.canvas.text((0,20),menuItem.name, font=FONT, fill=1)
 		self.led.display()
 
 	def cycleLights(self):
@@ -240,6 +244,7 @@ class Bartender(MenuDelegate):
 			#self.strip.setPixelColor(head, color) # Turn on 'head' pixel
 			#self.strip.setPixelColor(tail, 0)     # Turn off 'tail'
 			#self.strip.show()                     # Refresh strip
+			self.strip.show()                     # Refresh strip
 			time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
 
 			head += 1                        # Advance head position
@@ -270,12 +275,14 @@ class Bartender(MenuDelegate):
 		GPIO.output(pin, GPIO.HIGH)
 
 	def progressBar(self, waitTime):
-		interval = waitTime / 100.0
-		for x in range(1, 101):
-			self.led.clear_display()
-			self.updateProgressBar(x, y=35)
+		start_time = time.time()
+		self.led.cls()
+		self.led.canvas.text((30,20),"Dispensing...", font=FONT, fill=1)
+		while time.time() - start_time < waitTime:
+			prog = (time.time() - start_time)/waitTime
+			self.updateProgressBar(prog, y=35)
 			self.led.display()
-			time.sleep(interval)
+			time.sleep(0.5)
 
 	def makeDrink(self, drink, ingredients):
 		# cancel any button presses while the drink is being made
@@ -335,17 +342,11 @@ class Bartender(MenuDelegate):
 			self.menuContext.select()
 
 	def updateProgressBar(self, percent, x=15, y=15):
-		height = 10
-		width = self.screen_width-2*x
-		for w in range(0, width):
-			self.led.draw_pixel(w + x, y)
-			self.led.draw_pixel(w + x, y + height)
-		for h in range(0, height):
-			self.led.draw_pixel(x, h + y)
-			self.led.draw_pixel(self.screen_width-x, h + y)
-			for p in range(0, percent):
-				p_loc = int(p/100.0*width)
-				self.led.draw_pixel(x + p_loc, h + y)
+		h = 10
+		w = self.screen_width-2*x
+		p_loc = int(percent*w)
+		self.led.canvas.rectangle((x,y,x+w,y+h), outline=255, fill=0)
+		self.led.canvas.rectangle((x+1,y+1,x+p_loc,y+h-1), outline=255, fill=1)
 
 	def run(self):
 		self.startInterrupts()
