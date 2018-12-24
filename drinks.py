@@ -1,61 +1,60 @@
 # drinks.py
 drink_list = [
 	{
-		"name": "Rum & Coke",
+		"name": "LLB",
 		"ingredients": {
-			"rum": 50,
-			"coke": 150
-		}
-	}, {
-		"name": "Gin & Tonic",
-		"ingredients": {
-			"gin": 50,
-			"tonic": 150
-		}
-	}, {
-		"name": "Long Island",
-		"ingredients": {
-			"gin": 15,
-			"rum": 15,
-			"vodka": 15,
-			"tequila": 15,
-			"coke": 100,
-			"oj": 30
-		}
-	}, {
-		"name": "Screwdriver",
-		"ingredients": {
+			"lemon": 50,
+			"lime": 50,
+			"soda_water": 50,
 			"vodka": 50,
-			"oj": 150
+			"simple_syrup": 50
 		}
 	}, {
-		"name": "Margarita",
+		"name": "Mohito",
 		"ingredients": {
-			"tequila": 50,
-			"mmix": 150
+			"soda_water": 150,
+			"simple_syrup": 50,
+			"white_rum": 50
 		}
 	}, {
-		"name": "Gin & Juice",
+		"name": "Mohito (w/ Lime)",
+		"ingredients": {
+			"soda_water": 145,
+			"simple_syrup": 50,
+			"white_rum": 45,
+			"lime": 10
+		}
+	}, {
+		"name": "Moscow Mule",
+		"ingredients": {
+			"vodka": 45,
+			"ginger_beer": 195,
+			"lime": 10
+		}
+	}, {
+		"name": "Lemon Fizz",
 		"ingredients": {
 			"gin": 50,
-			"oj": 150
+			"lemon": 25,
+			"soda_water": 175
 		}
 	}, {
-		"name": "Tequila Sunrise",
+		"name": "Lime Fizz",
 		"ingredients": {
-			"tequila": 50,
-			"oj": 150
+			"gin": 50,
+			"lime": 25,
+			"soda_water": 175
 		}
 	}
 ]
 
 drink_options = [
 	{"name": "Gin", "value": "gin"},
-	{"name": "Rum", "value": "rum"},
 	{"name": "Vodka", "value": "vodka"},
-	{"name": "Tequila", "value": "tequila"},
-	{"name": "Tonic Water", "value": "tonic"},
-	{"name": "Coke", "value": "coke"},
-	{"name": "Orange Juice", "value": "oj"},
-	{"name": "Margarita Mix", "value": "mmix"}
+	{"name": "White Rum", "value": "white_rum"},
+	{"name": "Lemon", "value": "lemon"},
+	{"name": "Lime", "value": "lime"},
+	{"name": "Ginger Beer", "value": "ginger_beer"},
+	{"name": "Soda Water", "value": "soda_water"},
+	{"name": "Simple Syrup", "value": "simple_syrup"}
 ]
