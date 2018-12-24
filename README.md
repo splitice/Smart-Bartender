@@ -8,16 +8,10 @@ Make sure the following are installed:
 * Python 2.7 (should already be installed on most Raspberry Pi)
 * [pip](https://www.raspberrypi.org/documentation/linux/software/python.md)
 
-### Enable SPI
-You'll need to enable SPI for the OLED screen to work properly. Typing the following command in the terminal will bring you to a configuration menu.
+### Hardware
 
-```
-raspi-config 
-```
-
-Then navigate to `Interfacing Options` and select `SPI`. Make sure it's turned on and reboot.
-
-See this [article](https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/) for more help if you need it.
+* 2x PlexiGlass 130mm (L) x 210mm (W) x 10mm (D)
+* 1x PlexiGlass 144mm (L) x 210mm (W) x 10mm (D)
 
 ### I2C
 Make sure i2c is also configured properly. Type
