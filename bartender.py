@@ -17,14 +17,14 @@ GPIO.setmode(GPIO.BCM)
 SCREEN_WIDTH = 128
 SCREEN_HEIGHT = 64
 
-LEFT_BTN_PIN = 13
+LEFT_BTN_PIN = 12
 LEFT_PIN_BOUNCE = 1000
 
-RIGHT_BTN_PIN = 5
+RIGHT_BTN_PIN = 16
 RIGHT_PIN_BOUNCE = 2000
 
-OLED_RESET_PIN = 15
-OLED_DC_PIN = 16
+OLED_RESET_PIN = 20
+OLED_DC_PIN = 21
 
 NUMBER_NEOPIXELS = 45
 NEOPIXEL_DATA_PIN = 26
@@ -75,14 +75,14 @@ class Bartender(MenuDelegate):
 		# Here's how to control the strip from any two GPIO pins:
 		datapin  = NEOPIXEL_DATA_PIN
 		clockpin = NEOPIXEL_CLOCK_PIN
-		self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
-		self.strip.begin()           # Initialize pins for output
-		self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
+		#self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
+		#self.strip.begin()           # Initialize pins for output
+		#self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
 
 		# turn everything off
-		for i in range(0, self.numpixels):
-			self.strip.setPixelColor(i, 0)
-		self.strip.show() 
+		#for i in range(0, self.numpixels):
+		#	self.strip.setPixelColor(i, 0)
+		#self.strip.show() 
 
 		print "Done initializing"
 
@@ -237,9 +237,9 @@ class Bartender(MenuDelegate):
 		color = 0xFF0000        # 'On' color (starts red)
 
 		while getattr(t, "do_run", True):
-			self.strip.setPixelColor(head, color) # Turn on 'head' pixel
-			self.strip.setPixelColor(tail, 0)     # Turn off 'tail'
-			self.strip.show()                     # Refresh strip
+			#self.strip.setPixelColor(head, color) # Turn on 'head' pixel
+			#self.strip.setPixelColor(tail, 0)     # Turn off 'tail'
+			#self.strip.show()                     # Refresh strip
 			time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
 
 			head += 1                        # Advance head position
@@ -253,16 +253,16 @@ class Bartender(MenuDelegate):
 
 	def lightsEndingSequence(self):
 		# make lights green
-		for i in range(0, self.numpixels):
-			self.strip.setPixelColor(i, 0xFF0000)
-		self.strip.show()
+		#for i in range(0, self.numpixels):
+		#	self.strip.setPixelColor(i, 0xFF0000)
+		#self.strip.show()
 
 		time.sleep(5)
 
 		# turn lights off
-		for i in range(0, self.numpixels):
-			self.strip.setPixelColor(i, 0)
-		self.strip.show() 
+		#for i in range(0, self.numpixels):
+		#	self.strip.setPixelColor(i, 0)
+		#self.strip.show() 
 
 	def pour(self, pin, waitTime):
 		GPIO.output(pin, GPIO.LOW)
