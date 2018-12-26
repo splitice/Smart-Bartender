@@ -2,41 +2,49 @@
 	"pump_1": {
 		"name": "Pump 1",
 		"pin": 17, 
-		"value": "gin"
+		"value": "gin",
+		"flow_rate": 100
 	},
 	"pump_2": {
 		"name": "Pump 2",
 		"pin": 27, 
-		"value": "vodka"
+		"value": "vodka",
+		"flow_rate": 100
 	},
 	"pump_3": {
 		"name": "Pump 3",
 		"pin": 22, 
-		"value": "white_rum"
+		"value": "white_rum",
+		"flow_rate": 100
 	},
 	"pump_4": {
 		"name": "Pump 4",
 		"pin": 5, 
-		"value": "lemon"
+		"value": "lemon",
+		"flow_rate": 100
 	},
 	"pump_5": {
 		"name": "Pump 5",
 		"pin": 6, 
-		"value": "lime"
+		"value": "lime",
+		"flow_rate": 100
 	},
 	"pump_6": {
 		"name": "Pump 6",
 		"pin": 13, 
-		"value": "ginger_beer"
+		"value": "ginger_beer",
+		"flow_rate": 100
 	},
 	"pump_7": {
 		"name": "Pump 7",
 		"pin": 19, 
-		"value": "soda_water"
+		"value": "soda_water",
+		"flow_rate": 100
 	},
 	"pump_8": {
 		"name": "Pump 8",
 		"pin": 26, 
-		"value": "simple_syrup"
+		"value": "simple_syrup",
+		"flow_rate": 100
 	}
 }
