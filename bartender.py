@@ -132,7 +132,6 @@ class Bartender(MenuDelegate):
 		m.addOption(configuration_menu)
 		# create a menu context
 		self.menuContext = MenuContext(m, self)
-		self.menuContext.name = "Drinks"
 
 	def filterDrinks(self, menu):
 		"""
