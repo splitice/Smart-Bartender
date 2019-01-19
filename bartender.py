@@ -30,10 +30,6 @@ RIGHT_BTN_PIN = 16
 RIGHT_BTN_PIN = 5
 RIGHT_PIN_BOUNCE = 2000
 
-OLED_RESET_PIN = 20
-OLED_DC_PIN = 21
-OLED_RESET_PIN = 15
-
 NUMBER_NEOPIXELS = 45
 NEOPIXEL_DATA_PIN = 26
 NEOPIXEL_CLOCK_PIN = 6
@@ -62,7 +58,7 @@ class Bartender(MenuDelegate):
 
 		# Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
 		self.led = ssd1306(I2CBUS) # Change rows & cols values depending on your display dimensions.
-		logo = Image.open('pi_logo.png')
+		logo = Image.open('plogo.png')
 		self.led.canvas.bitmap((32, 0), logo, fill=0)
 		self.led.display()
 

@@ -31,6 +31,14 @@ i2c-dev
 
 press `esc` then `ZZ` to save and exit.
 
+## SPI
+
+Use raspi-config to enable SPI under Interfacing.
+
+```
+raspi-config 
+```
+
 ## OLED Setup
 The Raspberry Pi Guy has a nice script to setup the OLED screen on your raspberry pi. Download the following repository on your Pi:
 
@@ -62,6 +70,12 @@ and install the dependencies
 
 ```
 sudo pip install -r requirements.txt
+```
+
+and packages
+
+```
+sudo apt-get install python-smbus python-pil python-spidev
 ```
 
 You can start the bartender by running
