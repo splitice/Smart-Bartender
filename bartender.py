@@ -12,7 +12,7 @@ from lib_oled96 import ssd1306
 from smbus import SMBus
 from PIL import ImageFont, ImageDraw, Image
 ITEM_FONT = ImageFont.truetype('fonts/Roboto-Medium.ttf', 18)
-TITLE_FONT = ImageFont.truetype('fonts/Roboto-Medium.ttf', 16)
+TITLE_FONT = ImageFont.truetype('fonts/Roboto-Medium.ttf', 14)
 I2CBUS = SMBus(1)
 
 from dotstar import Adafruit_DotStar
