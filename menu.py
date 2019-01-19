@@ -39,6 +39,7 @@ class MenuContext(object):
 		self.topLevelMenu = menu
 		self.currentMenu = menu
 		self.delegate = delegate
+		self.name = "Menu"
 		self.showMenu()
 
 	def showMenu(self):
@@ -64,11 +65,14 @@ class MenuContext(object):
 		Tells the delegate to display the selection. Advances to the next selection if the 
 		menuItem is visible==False
 		"""
+		
 		self.delegate.prepareForRender(self.topLevelMenu)
+		self.delegate.displayMenuTitle(self.name)
 		if (not menuItem.visible):
 			self.advance()
 		else:
 			self.delegate.displayMenuItem(menuItem)
+		self.delegate.displayRender()
 
 	def advance(self):
 		"""

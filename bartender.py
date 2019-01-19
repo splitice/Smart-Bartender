@@ -55,10 +55,10 @@ class Bartender(MenuDelegate):
 		gpio = gaugette.gpio.GPIO()
 		spi = gaugette.spi.SPI(spi_bus, spi_device)
 
-		# Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
 		self.led = ssd1306(I2CBUS) # Change rows & cols values depending on your display dimensions.
 		logo = Image.open('logo.png')
-		self.led.canvas.bitmap((32, 0), logo, fill=0)
+		self.led.canvas.bitmap((0, 0), logo, fill=1)
+		self.led.canvas.rectangle((0, 0, self.led.width-1, self.led.height-1), outline=1)
 		self.led.display()
 
 		# load the pump configuration from file
@@ -72,14 +72,8 @@ class Bartender(MenuDelegate):
 		# Here's how to control the strip from any two GPIO pins:
 		datapin  = NEOPIXEL_DATA_PIN
 		clockpin = NEOPIXEL_CLOCK_PIN
-		#self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
-		#self.strip.begin()           # Initialize pins for output
-		#self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
 
-		# turn everything off
-		#for i in range(0, self.numpixels):
-		#	self.strip.setPixelColor(i, 0)
-		#self.strip.show() 
+		time.sleep(2)
 
 		print "Done initializing"
 
@@ -137,6 +131,7 @@ class Bartender(MenuDelegate):
 		m.addOption(configuration_menu)
 		# create a menu context
 		self.menuContext = MenuContext(m, self)
+		self.menuContext.name = "Drinks"
 
 	def filterDrinks(self, menu):
 		"""
@@ -221,10 +216,15 @@ class Bartender(MenuDelegate):
 		# self.startInterrupts()
 		self.running = False
 
+	def displayMenuTitle(self, title):
+		self.led.canvas.text((0,0), title, font=FONT, fill=1)
+
 	def displayMenuItem(self, menuItem):
 		print menuItem.name
-		self.led.cls()
 		self.led.canvas.text((0,20),menuItem.name, font=FONT, fill=1)
+		self.led.display()
+
+	def displayRender(self)
 		self.led.display()
 
 	def cycleLights(self):
