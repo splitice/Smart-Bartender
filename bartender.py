@@ -11,7 +11,8 @@ import traceback
 from lib_oled96 import ssd1306
 from smbus import SMBus
 from PIL import ImageFont, ImageDraw, Image
-FONT = ImageFont.truetype('fonts/Roboto-Medium.ttf', 18)
+ITEM_FONT = ImageFont.truetype('fonts/Roboto-Medium.ttf', 18)
+TITLE_FONT = ImageFont.truetype('fonts/Roboto-Medium.ttf', 16)
 I2CBUS = SMBus(1)
 
 from dotstar import Adafruit_DotStar
@@ -218,11 +219,11 @@ class Bartender(MenuDelegate):
 		self.running = False
 
 	def displayMenuTitle(self, title):
-		self.led.canvas.text((0,0), title, font=FONT, fill=1)
+		self.led.canvas.text((0,0), title, font=TITLE_FONT, fill=1)
 
 	def displayMenuItem(self, menuItem):
 		print menuItem.name
-		self.led.canvas.text((0,20),menuItem.name, font=FONT, fill=1)
+		self.led.canvas.text((0,20),menuItem.name, font=ITEM_FONT, fill=1)
 		self.led.display()
 
 	def displayRender(self):
