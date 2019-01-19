@@ -168,6 +168,7 @@ class Bartender(MenuDelegate):
 	def prepareForRender(self, menu):
 		self.filterDrinks(menu)
 		self.selectConfigurations(menu)
+		self.led.cls()
 		return True
 
 	def menuItemClicked(self, menuItem):
