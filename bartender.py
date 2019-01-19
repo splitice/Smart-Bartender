@@ -224,7 +224,7 @@ class Bartender(MenuDelegate):
 		self.led.canvas.text((0,20),menuItem.name, font=FONT, fill=1)
 		self.led.display()
 
-	def displayRender(self)
+	def displayRender(self):
 		self.led.display()
 
 	def cycleLights(self):
